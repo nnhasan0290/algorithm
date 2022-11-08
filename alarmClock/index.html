@@ -13,31 +13,32 @@
       <h2>Alarm Clock</h2>
     </header>
     <main>
-      <h3>date and day</h3>
-      <h1>Actual time</h1>
-      <p class="label__of__input">set Alarm time</p>
+      <h3 class="current_date"></h3>
+      <h1 class="current_time"></h1>
+      <h3 class="label__of__input">Set Alarm time</h3>
       <div class="input__area">
         <div>
-          <label for="">Hours</label>
+          <label for="">Hours:</label>
           <select name="hour" id="hour">
             <option value="12">12</option>
           </select>
         </div>
         <div>
-          <label for="">Minutes</label>
+          <label for="">Minutes:</label>
           <select name="minute" id="minute">
             <option value="00">00</option>
           </select>
         </div>
         <div>
-            <label for="">Am or pm</label>
+            <label for="">Am or Pm:</label>
           <select name="am_pm" id="am_pm">
-            <option value="pm">pm</option>
+            <option value="pm">AM</option>
+            <option value="pm">PM</option>
           </select>
         </div>
       </div>
-      <div>
-          <h2>Show already added alarms</h2>
+      <button>Set An Alarm</button>
+      <div class="given__alarms">
           <ul>
             <li>first alarm</li>
             <li>first alarm</li>
