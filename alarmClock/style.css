@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+}
+
+:root{
+    --border: 1px solid lightgray;
+    --border-radius: 5px;
+    --background: #0E1525;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #0E1525;
+    color: white;
+}
+header{
+    text-align: center;
+    border-bottom: var(--border);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.input__area{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+}
+
+select{
+    min-width: 100px;
+    border: var(--border);
+    outline: none;
+    background: var(--background);
+    border-radius: var(--border-radius);
+    color: white;
+    font-size: 1rem;
+    padding: 15px;
+}
