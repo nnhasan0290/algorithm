@@ -30,6 +30,7 @@ main {
   justify-content: space-around;
   align-items: center;
   gap: 30px;
+  flex-wrap: wrap;
 }
 
 select {
@@ -77,17 +78,32 @@ ul, li{
 
 .given__alarms>ul{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
+    align-items: center;
 }
 .given__alarms li{
     padding: 10px 20px;
+    border-bottom: 1px solid lightgray;
+    font-size: 1.2rem;
+    margin: 0 15px;
+}
+.given__alarms li span{
+  color: red;
+  cursor: pointer;
+  padding: 3px 10px;
+}
+.given__alarms li span:hover{
+  background-color: gray;
+  border-radius: 5px;
+  transition: all 0.3s;
+  
 }
 
 button{
     width: 100%;
     padding: .8rem;
-    margin: 2rem;
+    margin: 2rem 0;
     max-width: 350px;
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -102,8 +118,41 @@ button:hover{
     transition: all 0.3s;
 }
 
+form#submit__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alarm_modal{
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.alarm_modal_inner{
+  background: #0e1525;
+  width: 70%;
+  border-radius: 15px;
+  min-width: 250px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 @media screen and (max-width: 400px) {
     .input__area{
         gap: 10px;
+    }
+    button{
+      padding: auto;
+      margin: 2rem 0;
     }
 }
