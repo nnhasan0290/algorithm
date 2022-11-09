@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --border: 1px solid lightgray;
+  --border-radius: 5px;
+  --background: #0e1525;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0e1525;
+  color: white;
+}
+header {
+  text-align: center;
+  border-bottom: var(--border);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.input__area {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+select {
+  min-width: 100px;
+  border: var(--border);
+  outline: none;
+  background: var(--background);
+  border-radius: var(--border-radius);
+  color: white;
+  font-size: 1rem;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+select:hover{
+    background-color: gray;
+}
+option {
+  background-color: var(--background);
+}
+
+.label__of__input{
+    border-bottom: var(--border);
+    padding: 1rem;
+}
+
+.input__area div{
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  
+}
+
+ul, li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.given__alarms{
+    padding: 20px;
+    margin: 30px 5px;
+    display: flex;
+}
+
+.given__alarms>ul{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.given__alarms li{
+    padding: 10px 20px;
+    border-bottom: 1px solid lightgray;
+    font-size: 1.2rem;
+    margin: 0 15px;
+}
+.given__alarms li span{
+  color: red;
+  cursor: pointer;
+  padding: 3px 10px;
+}
+.given__alarms li span:hover{
+  background-color: gray;
+  border-radius: 5px;
+  transition: all 0.3s;
+  
+}
+
+button{
+    width: 100%;
+    padding: .8rem;
+    margin: 2rem 0;
+    max-width: 350px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: var(--border);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+button:hover{
+    background-color: gray;
+    color: white;
+    transition: all 0.3s;
+}
+
+form#submit__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alarm_modal{
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.alarm_modal_inner{
+  background: #0e1525;
+  width: 70%;
+  border-radius: 15px;
+  min-width: 250px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+@media screen and (max-width: 400px) {
+    .input__area{
+        gap: 10px;
+    }
+    button{
+      padding: auto;
+      margin: 2rem 0;
+    }
+}
