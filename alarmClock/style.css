@@ -135,7 +135,8 @@ form#submit__form {
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .alarm_modal_inner{

@@ -27,16 +27,22 @@ class Alarm {
     } else {
       h = parseInt(hour) < 12 ? hour : parseInt(hour) + 12;
     }
-    d = this.hour > h ? parseInt(day) + 1 : day;
+    d = this.hour > h && day === this.day ? parseInt(day) + 1 : day;
     m = minute;
     return { d, h, m };
   }
 
   checking(prev, newDate) {
     console.log(prev, newDate);
-    if (!prev.find((each) => each.time.day === newDate.day)) return false;
-    if (!prev.find((each) => each.time.hour === newDate.hour)) return false;
-    if (!prev.find((each) => each.time.minute === newDate.minute)) return false;
+    if (
+      !prev.find(
+        (each) =>
+          each.time.day === newDate.day &&
+          each.time.hour === newDate.hour &&
+          each.time.minute === newDate.minute
+      )
+    )
+      return false;
     return true;
   }
 
@@ -48,9 +54,9 @@ class Alarm {
       ? JSON.parse(localStorage.getItem("alarm"))
       : [];
 
-      if(previous.length >=5){
-        console.log("you cannot add more than five alarms");
-        return;
+    if (previous.length >= 5) {
+      console.log("you cannot add more than five alarms");
+      return;
     }
 
     const newDate = this.findTime(d, h, m);
@@ -63,6 +69,17 @@ class Alarm {
       localStorage.setItem("alarm", stringified);
     }
   }
+
+  alarmCheck() {
+    const saved = JSON.parse(localStorage.getItem("alarm"));
+    const current_alarm = saved.find(
+      (each) =>
+        each.time.day === this.day &&
+        each.time.hour === this.hour &&
+        each.time.minute === this.minute
+    );
+    return current_alarm;
+  }
 }
 
 const date_selector = document.getElementById("date");
@@ -70,6 +87,7 @@ const hour_selector = document.getElementById("hour");
 const minute_selector = document.getElementById("minute");
 const am_pm_selector = document.getElementById("am_pm");
 const submit_selector = document.getElementById("submit__form");
+const modal_selector = document.querySelector(".alarm_modal");
 
 let options_hour = [];
 
@@ -107,6 +125,26 @@ const keepUpdatingTime = () => {
   document.querySelector(".current_date").innerHTML = `${alarm.day} / ${
     alarm.month + 1
   } / ${alarm.year}`;
+  if (alarm.alarmCheck()) {
+    document.querySelector(".close__btn").onclick = () => {
+      const previous = JSON.parse(localStorage.getItem("alarm"));
+      previous.splice(
+        previous.find(
+          (each) =>
+            each.time.day === this.day &&
+            each.time.hour === this.hour &&
+            each.time.minute === this.minute
+        ),1
+      );
+      localStorage.setItem("alarm", JSON.stringify(previous));
+      window.location.reload();
+    };
+    modal_selector.style.visibility = "visible";
+    modal_selector.style.opacity = 1;
+  } else {
+    modal_selector.style.visibility = "hidden";
+    modal_selector.style.opacity = 0;
+  }
 };
 
 setInterval(() => {
@@ -144,29 +182,34 @@ submit_selector.addEventListener("submit", (event) => {
 
 const updateAlarms = () => {
   const given_alarms = document.querySelector(".given__alarms ul");
-  const alarms = localStorage.getItem("alarm") ? JSON.parse(localStorage.getItem("alarm")): [];
-  
-   given_alarms.innerHTML = "";
+  const alarms = localStorage.getItem("alarm")
+    ? JSON.parse(localStorage.getItem("alarm"))
+    : [];
+
+  given_alarms.innerHTML = "";
 
   for (let i = 0; i < alarms.length; i++) {
-    given_alarms.innerHTML += `<li id=${i}>${alarms[i].time.hour >12? alarms[i].time.hour - 12 : alarms[i].time.hour}H: ${alarms[i].time.minute}M: ${alarms[i].pm ? "PM" : "AM"} (Date:${alarms[i].time.day}) <span class="cross">X</span></li>`;
+    given_alarms.innerHTML += `<li id=${i}>${
+      alarms[i].time.hour > 12 ? alarms[i].time.hour - 12 : alarms[i].time.hour
+    }H: ${alarms[i].time.minute}M: ${alarms[i].pm ? "PM" : "AM"} (Date:${
+      alarms[i].time.day
+    }) <span class="cross">X</span></li>`;
   }
 };
 
 updateAlarms();
 
-
 //delete
-let cross = document.querySelectorAll('.cross');
+let cross = document.querySelectorAll(".cross");
 
-cross.forEach((each,i) => {
+cross.forEach((each, i) => {
   each.onclick = (e) => {
     console.log(i);
     const previous = JSON.parse(localStorage.getItem("alarm"));
-    previous.splice(i,1);
+    previous.splice(i, 1);
     console.log(previous);
-     localStorage.setItem("alarm", JSON.stringify(previous))
-     window.location.reload();
-  }
-})
+    localStorage.setItem("alarm", JSON.stringify(previous));
+    window.location.reload();
+  };
+});
 console.log(cross);
